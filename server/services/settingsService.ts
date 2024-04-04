@@ -38,7 +38,7 @@ export default ({ strapi }) => {
         if (!serviceAccount) return;
         admin.initializeApp({
           credential: admin.credential.cert(serviceAccount as ServiceAccount),
-        });
+        }, 'strapi-firebase-auth');
         strapi.firebase = admin;
       } catch (error) {
         console.log("bootstrap error -->", error);
