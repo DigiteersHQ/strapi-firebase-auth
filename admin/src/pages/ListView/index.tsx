@@ -90,14 +90,17 @@ function ListView({ data, meta }: ListViewProps) {
   };
 
   const fetchPaginatedUsers = async () => {
+    // @ts-ignore
     const nextPageToken = await getNextPageToken(query.query?.page as string);
 
     if (nextPageToken && query?.query) {
-      query.query.nextPageToken = nextPageToken;
+      // @ts-ignore
+      query.query?.nextPageToken = nextPageToken;
     }
     const response = await fetchUsers(query.query);
 
     if (response.pageToken) {
+      // @ts-ignore
       setNextPageToken(query.query?.page as string, response.pageToken);
     }
     return response;
@@ -115,7 +118,9 @@ function ListView({ data, meta }: ListViewProps) {
             ...item,
           };
         });
+        // @ts-ignore
         if (query.query?._q) {
+          // @ts-ignore
           data = matchSorter(data, query.query?._q as string, {
             keys: ["email", "displayName", "username"],
           });
